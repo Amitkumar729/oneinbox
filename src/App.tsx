@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 const Sidebar = lazy(() =>
   import("./components/layout/Sidebar").then((module) => ({
     default: module.Sidebar,
@@ -17,11 +18,13 @@ function App() {
   return (
     <Router>
       <Suspense fallback={<div>Loading....</div>}>
-        <div className="flex">
+        <div className="flex h-screen">  
           <Sidebar />
-          <Routes>
-            <Route path="/" element={<ChatArea />} />
-          </Routes>
+          <div className="flex-1"> 
+            <Routes>
+              <Route path="/" element={<ChatArea />} />
+            </Routes>
+          </div>
         </div>
       </Suspense>
     </Router>
