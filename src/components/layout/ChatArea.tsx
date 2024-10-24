@@ -4,7 +4,7 @@ import { ChatFooter } from "./ChatFooter";
 
 export const ChatArea = () => {
   return (
-    <div className="flex flex-col  w-full">
+    <div className="flex flex-col w-full ">
       {/* Chat Header */}
       <ChatHeader />
       {/* Seprater */}

@@ -6,9 +6,9 @@ export const ChatHeader: React.FC = () => {
     <div className="flex justify-between  items-center p-2 w-full">
       <div className="flex items-center">
         <img src="/images/naruto.jpeg" className="w-9 h-9 rounded-full mr-3" />
-        <h3 className="text-xl font-semibold ">Amit Gupta</h3>
+        <h3 className="text-xl font-semibold ">Luffy</h3>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center cursor-pointer ">
         <EllipsisVertical className="w-6 h-6" />
       </div>
     </div>
