@@ -1,12 +1,10 @@
-"use client";
-
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./Toolbar";
 import Underline from "@tiptap/extension-underline";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 
-const Tiptap = ({ onChange, content }: any) => {
+const Tiptap = forwardRef(({ onChange, content }: any, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleChange = (newContent: string) => {
@@ -24,30 +22,45 @@ const Tiptap = ({ onChange, content }: any) => {
     onUpdate: ({ editor }) => {
       handleChange(editor.getHTML());
     },
-    content, // content editor Initialize
+    content,
   });
+
+  //  clearContent method via ref for the editor
+  useImperativeHandle(ref, () => ({
+    clearContent() {
+      editor?.commands.clearContent();
+    },
+  }));
 
   // Effect to manage focus state
   useEffect(() => {
     if (editor) {
-      editor.on('focus', () => setIsFocused(true));
-      editor.on('blur', () => setIsFocused(false));
+      editor.on("focus", () => setIsFocused(true));
+      editor.on("blur", () => setIsFocused(false));
     }
   }, [editor]);
 
   return (
-    <div className="relative w-full px-4">
+    <div className="relative w-full px-4 ">
       <Toolbar editor={editor} content={content} />
-      <div className="relative">
+      <div className="relative ">
         {!isFocused && !content && (
           <div className="absolute left-4 top-3 text-gray-500 pointer-events-none">
             Write a message...
           </div>
         )}
-        <EditorContent style={{ whiteSpace: "pre-line" }} editor={editor} />
+        <EditorContent
+          style={{
+            whiteSpace: "pre-line",
+            maxWidth: "100%",
+            width: "100%",
+            wordWrap: "break-word",
+          }}
+          editor={editor}
+        />
       </div>
     </div>
   );
-};
+});
 
 export default Tiptap;

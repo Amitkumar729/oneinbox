@@ -5,7 +5,7 @@ import {
   Italic,
   List,
   ListOrdered,
-  Heading2,
+//   Heading2,
   Underline,
   Quote,
   Undo,
