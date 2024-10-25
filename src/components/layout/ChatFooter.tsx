@@ -3,7 +3,11 @@ import Tiptap from "../TextEditor/Tiptap";
 import { useDispatch } from "react-redux";
 import { addMessage } from "../store/reducers/chatSlice";
 
-export const ChatFooter: React.FC = () => {
+interface ChatFooterProps {
+  placeholder: string;  
+}
+
+export const ChatFooter:React.FC<ChatFooterProps> = ({ placeholder }) => {
   const [content, setContent] = useState<string>("");
   const dispatch = useDispatch();
   const editorRef = useRef<any>(null);
@@ -17,7 +21,7 @@ export const ChatFooter: React.FC = () => {
         editorRef.current.clearContent(); 
       }
     }
-    console.log("data: ", content);
+    // console.log("data: ", content);
   };
 
   return (
@@ -27,6 +31,7 @@ export const ChatFooter: React.FC = () => {
         ref={editorRef}
           content={content}
           onChange={(newContent: string) => setContent(newContent)}
+          placeholder={placeholder} 
         />
       </form>
     </div>

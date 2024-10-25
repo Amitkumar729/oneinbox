@@ -4,7 +4,7 @@ import Toolbar from "./Toolbar";
 import Underline from "@tiptap/extension-underline";
 import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 
-const Tiptap = forwardRef(({ onChange, content }: any, ref) => {
+const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleChange = (newContent: string) => {
@@ -46,7 +46,7 @@ const Tiptap = forwardRef(({ onChange, content }: any, ref) => {
       <div className="relative ">
         {!isFocused && !content && (
           <div className="absolute left-4 top-3 text-gray-500 pointer-events-none">
-            Write a message...
+           {placeholder}
           </div>
         )}
         <EditorContent

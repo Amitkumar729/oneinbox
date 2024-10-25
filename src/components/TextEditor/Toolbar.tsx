@@ -181,7 +181,7 @@ const Toolbar = ({ editor, content }: Props) => {
       </div>
       {content && (
         <button type="submit" className="px-1 rounded-md">
-          <SendHorizontal />
+          <SendHorizontal  className="text-gray-600" />
         </button>
       )}
     </div>

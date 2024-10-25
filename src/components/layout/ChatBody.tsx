@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { EllipsisVertical } from "lucide-react";
-import { useSelector, UseSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
-export const ChatBody: React.FC = () => {
+interface User {
+  id: number;
+  name: string;
+  image: string;
+  status: "online" | "offline" | "away";
+  iconName: string;
+}
+
+interface ChatBodyProps {
+  user: User; // Accept the user prop
+}
+
+export const ChatBody: React.FC<ChatBodyProps> = ({ user }) => {
+  // export const ChatBody: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const messages = useSelector((state: RootState) => state.chat.messages);
 
@@ -60,7 +73,10 @@ export const ChatBody: React.FC = () => {
 
       {/* .............................Sender Message........................*/}
       {messages.map((message, index) => (
-        <div className=" hover:bg-gray-200  mb-3 rounded-lg flex justify-end">
+        <div
+          className=" hover:bg-gray-200  mb-3 rounded-lg flex justify-end"
+          key={index}
+        >
           <div className="flex items-start  p-1 max-w-[70%] mr-5  bg-gray-200  rounded-lg">
             {/* message box */}
             <div className="flex flex-col w-full">
@@ -75,16 +91,15 @@ export const ChatBody: React.FC = () => {
               </div>
               <div>
                 {/* message content */}
-                <h5 className="items-center text-sm ">{message}</h5>
+                <h5
+                  className="items-center text-sm"
+                  dangerouslySetInnerHTML={{ __html: message }}
+                />
               </div>
             </div>
           </div>
         </div>
       ))}
-
-    
-
-     
     </>
   );
 };
