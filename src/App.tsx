@@ -12,13 +12,13 @@ interface User {
 }
 
 const Sidebar = lazy(() =>
-  import("./components/layout/Sidebar").then((module) => ({
+  import("./components/layout/Sidebar/Sidebar").then((module) => ({
     default: module.Sidebar,
   }))
 );
 
 const ChatArea = lazy(() =>
-  import("./components/layout/ChatArea").then((module) => ({
+  import("./components/layout/Chat/ChatArea").then((module) => ({
     default: module.ChatArea,
   }))
 );

@@ -38,13 +38,13 @@ const users: User[] = [
     status: "offline",
     iconName: "telegram",
   },
-  {
-    id: 3,
-    name: "Vishal Goswami",
-    image: "/images/luffy.jpg",
-    status: "online",
-    iconName: "bot",
-  },
+  // {
+  //   id: 3,
+  //   name: "Vishal Goswami",
+  //   image: "/images/luffy.jpg",
+  //   status: "online",
+  //   iconName: "bot",
+  // },
   {
     id: 4,
     name: "Tarun bhai",
@@ -93,17 +93,17 @@ export const Sidebar: React.FC<{ onUserSelect: (user: User) => void }> = ({
 const UserItem: React.FC<UserItemProps> = ({ user, onUserSelect }) => {
   return (
     <div
-      className="flex items-center px-3 py-2 hover:bg-gray-300 rounded-md cursor-pointer"
+      className="flex items-center px-3 py-1 hover:bg-gray-200 rounded-md cursor-pointer"
       onClick={() => onUserSelect(user)}
     >
       <div className="relative">
         <img
           src={user.image}
           alt={user.name}
-          className="w-8 h-8 rounded-full object-cover"
+          className="w-8 h-8 rounded-md object-cover"
         />
         <span
-          className={`absolute top-0 left-0 w-2.5 h-2.5 rounded-full border-2 border-white ${
+          className={`absolute top-0 left-0 w-2.5 h-2.5 rounded-md border-2 border-white ${
             user.status === "online"
               ? "bg-green-500"
               : user.status === "away"
