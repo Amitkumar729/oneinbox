@@ -1,11 +1,19 @@
 import React, { useRef, useState } from "react";
 import Tiptap from "../../TextEditor/Tiptap";
-import { useDispatch } from "react-redux";
-import { addMessage } from "../../store/reducers/chatSlice";
-import { ReplyMessage } from "./Replymessage";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { addMessage, clearReplyTarget } from "../../store/reducers/chatSlice";
+import { ReplyMessage } from "../Message/Replymessage";
 
 interface ChatFooterProps {
   placeholder: string;
+}
+
+interface Message {
+  id: number;
+  content: string;
+  type: "message" | "reply";
+  replyTo?: number;
 }
 
 export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
@@ -13,32 +21,36 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
   const dispatch = useDispatch();
   const editorRef = useRef<any>(null);
 
-  const [replyTarget, setReplyTarget] = useState(true);
+ 
+  const { replyTarget, replyToId } = useSelector((state: RootState) => state.chat);
 
   const handleClose = () => {
-    setReplyTarget(false);
-  }
+    dispatch(clearReplyTarget());
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (content.trim()) {
-      
-      dispatch(addMessage(content));
+      const newMessage: Message = {
+        id: Date.now(),
+        content,
+        type: replyTarget ? "reply" : "message",
+        replyTo: replyTarget ? replyToId : undefined,
+      };
+
+      dispatch(addMessage(newMessage));
       setContent("");
-      setReplyTarget(false);
+      dispatch(clearReplyTarget());
 
       if (editorRef.current) {
         editorRef.current.clearContent();
       }
     }
-    console.log("data: ", content);
   };
 
   return (
-    <div className="flex flex-col mb-4 ">
-      {
-        replyTarget && <ReplyMessage  onClose={handleClose}/>
-      }
+    <div className="flex flex-col mb-4">
+      {replyTarget && <ReplyMessage onClose={handleClose} />}
       <form onSubmit={handleSubmit}>
         <Tiptap
           ref={editorRef}

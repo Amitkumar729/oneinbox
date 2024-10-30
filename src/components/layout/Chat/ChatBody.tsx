@@ -2,8 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { DateSeparator } from "./DateSeparator";
-import { ReceiverMessage } from "./ReceiverMessage";
-import { SenderMessage } from "./SenderMessage";
+import { ReceiverMessage } from "../Message/ReceiverMessage";
+import { SenderMessage } from "../Message/SenderMessage";
 
 interface User {
   id: number;
@@ -22,7 +22,7 @@ export const ChatBody: React.FC<ChatBodyProps> = ({ user }) => {
 
   return (
     <>
-      <ReceiverMessage />
+      <ReceiverMessage  />
 
       <DateSeparator />
 
