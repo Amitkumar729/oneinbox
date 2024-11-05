@@ -3,6 +3,9 @@ import { Reply } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { setReplyTarget } from "../../store/reducers/chatSlice";
 import { TextReply } from "./TextReply";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 
 interface Message {
   id: number;
@@ -47,16 +50,22 @@ export const SenderMessage: React.FC<SenderMessageProps> = ({ messages }) => {
                 {message.type === "reply" ? (
                   <div className="p-1 rounded-lg  ">
                     <TextReply />
-                    <p
-                      className="text-sm"
-                      dangerouslySetInnerHTML={{ __html: message.content }}
-                    />
+                    <p className="text-sm">
+                      <ReactMarkdown
+                        children={message.content}
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeRaw]}
+                      />
+                    </p>
                   </div>
                 ) : (
-                  <h5
-                    className="items-center text-sm"
-                    dangerouslySetInnerHTML={{ __html: message.content }}
-                  />
+                  <h5 className="items-center text-sm">
+                    <ReactMarkdown
+                      children={message.content}
+                      remarkPlugins={[remarkGfm]}
+                      rehypePlugins={[rehypeRaw]}
+                    />
+                  </h5>
                 )}
               </div>
             </div>

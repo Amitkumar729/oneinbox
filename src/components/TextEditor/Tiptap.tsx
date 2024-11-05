@@ -3,12 +3,13 @@ import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./Toolbar";
 import Underline from "@tiptap/extension-underline";
 import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
+import { customMarkdownSerializer } from "./customMarkdownSerializer";
 
 const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleChange = (newContent: string) => {
-    onChange(newContent);
+  const handleChange = (markdownContent: string) => {
+    onChange(markdownContent);
   };
 
   const editor = useEditor({
@@ -20,7 +21,12 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
       },
     },
     onUpdate: ({ editor }) => {
-      handleChange(editor.getHTML());
+      // const htmlContent = editor.getHTML();
+      const doc = editor.state.doc;
+      // console.log(doc);
+      const markdownContent = customMarkdownSerializer.serialize(doc);
+      handleChange(markdownContent);
+      // console.log(markdownContent);
     },
     content,
   });
@@ -45,7 +51,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
       <div className="relative ">
         {!isFocused && !content && (
           <div className="absolute left-4 top-3 text-gray-700 pointer-events-none">
-           {placeholder}
+            {placeholder}
           </div>
         )}
         <EditorContent
@@ -58,7 +64,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
           editor={editor}
         />
       </div>
-          <Toolbar editor={editor} content={content} />
+      <Toolbar editor={editor} content={content} />
     </div>
   );
 });
