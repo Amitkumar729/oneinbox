@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface Message {
+// Updated Message interface to match API response structure
+interface ChatMessage {
   id: number;
   content: string;
   type: "message" | "reply";
-  replyTo?: number;
+  replyTo?: string;
 }
 
 interface ChatState {
-  messages: Message[];
+  messages: ChatMessage[];
   replyTarget: boolean;
-  replyToId?: number;
+  replyToId?: string;  
 }
 
 const initialState: ChatState = {
@@ -22,10 +23,10 @@ const chatSlice = createSlice({
   name: "chat",
   initialState,
   reducers: {
-    addMessage: (state, action: PayloadAction<Message>) => {
+    addMessage: (state, action: PayloadAction<ChatMessage>) => {
       state.messages.push(action.payload);
     },
-    setReplyTarget: (state, action: PayloadAction<number>) => {
+    setReplyTarget: (state, action: PayloadAction<string>) => {
       state.replyTarget = true;
       state.replyToId = action.payload;
     },
@@ -36,5 +37,5 @@ const chatSlice = createSlice({
   },
 });
 
-export const { addMessage,  setReplyTarget, clearReplyTarget } = chatSlice.actions;
+export const { addMessage, setReplyTarget, clearReplyTarget } = chatSlice.actions;
 export default chatSlice.reducer;

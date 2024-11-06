@@ -31,34 +31,6 @@ const users: User[] = [
     status: "online",
     iconName: "instagram",
   },
-  {
-    id: 2,
-    name: "Sumit Pandat",
-    image: "/images/luffy.jpeg",
-    status: "offline",
-    iconName: "telegram",
-  },
-  // {
-  //   id: 3,
-  //   name: "Vishal Goswami",
-  //   image: "/images/luffy.jpg",
-  //   status: "online",
-  //   iconName: "bot",
-  // },
-  {
-    id: 4,
-    name: "Tarun bhai",
-    image: "/images/naruto.jpeg",
-    status: "away",
-    iconName: "whatsapp",
-  },
-  {
-    id: 5,
-    name: "Manoj daila",
-    image: "/images/logo.avif",
-    status: "online",
-    iconName: "bot",
-  },
 ];
 
 export const Sidebar: React.FC<{ onUserSelect: (user: User) => void }> = ({
@@ -71,9 +43,6 @@ export const Sidebar: React.FC<{ onUserSelect: (user: User) => void }> = ({
       <div className="flex-1 overflow-y-auto">
         <div className="px-2 py-3">
           <div className="mt-6">
-            <h2 className="px-3 text-xs font-semibold text-black-500 uppercase tracking-wider">
-              Members
-            </h2>
             <div className="mt-3 space-y-1">
               {users.map((user) => (
                 <UserItem

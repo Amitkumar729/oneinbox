@@ -13,7 +13,7 @@ interface Message {
   id: number;
   content: string;
   type: "message" | "reply";
-  replyTo?: number;
+  replyTo?: string;
 }
 
 export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {

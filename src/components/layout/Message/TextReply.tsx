@@ -1,6 +1,18 @@
 import React from "react";
+import { ChatData } from "../../../data";
 
-export const TextReply: React.FC = () => {
+interface TextReplyProps {
+  replyToId: string;  
+}
+
+
+export const TextReply: React.FC<TextReplyProps> = ({ replyToId }) => {
+  console.log("replyToId:-", replyToId);
+
+  const replyMessage = ChatData.find((chat) => chat.messageID === replyToId);
+  if (!replyMessage) return null;
+
+
   return (
     <div className="p-1 border flex gap-2 border-gray-300 text-xs max-w-full  rounded-md  ">
       <div className="h-auto border ml-1 border-gray-300  "></div>
@@ -10,13 +22,12 @@ export const TextReply: React.FC = () => {
             <span className="font-semibold text-xs">Amit</span>
             <span className="h-4  border border-gray-300"></span>
             <span className=" text-xs  text-gray-400 ">
-              2nd September at 9:06 PM
+             {replyMessage.time}
             </span>
           </div>
         </div>
         <div className="p-1 items-center">
-          This is the testing message, hello how are you Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Repellhello how are you.
+        {replyMessage.message}
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { Loader } from "./components/Loaders/loader";
  
 interface User {
   id: number;
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <Router>
-      <Suspense fallback={<div>Loading....</div>}>
+      <Suspense fallback={<Loader/>}>
         <div className="flex h-screen">  
           <Sidebar onUserSelect={handleUserSelect} />
           <div className="flex-1"> 
