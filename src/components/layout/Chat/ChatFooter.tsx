@@ -4,25 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { addMessage, clearReplyTarget } from "../../store/reducers/chatSlice";
 import { ReplyMessage } from "../Message/Replymessage";
-
-interface ChatFooterProps {
-  placeholder: string;
-}
-
-interface Message {
-  id: number;
-  content: string;
-  type: "message" | "reply";
-  replyTo?: string;
-}
+import { ChatFooterProps, Message } from "../../../types";
 
 export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
   const [content, setContent] = useState<string>("");
   const dispatch = useDispatch();
   const editorRef = useRef<any>(null);
 
- 
-  const { replyTarget, replyToId } = useSelector((state: RootState) => state.chat);
+  const { replyTarget, replyToId } = useSelector(
+    (state: RootState) => state.chat
+  );
 
   const handleClose = () => {
     dispatch(clearReplyTarget());

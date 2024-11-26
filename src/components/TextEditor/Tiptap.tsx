@@ -17,7 +17,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
     editorProps: {
       attributes: {
         class:
-          "flex flex-col px-4 py-3 justify-start border-t  border-r border-l border-gray-600 items-start w-full gap-2 text-sm pt-4 outline-none",
+          "flex flex-col px-4 py-3 justify-start border-t border-r border-l border-gray-600 items-start w-full gap-2 text-sm pt-4 outline-none",
       },
     },
     onUpdate: ({ editor }) => {

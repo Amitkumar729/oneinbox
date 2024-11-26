@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Updated Message interface to match API response structure
+ 
 interface ChatMessage {
   id: number;
   content: string;

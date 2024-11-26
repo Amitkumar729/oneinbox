@@ -4,12 +4,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-       'roboto-condensed': ['"Roboto Condensed"', 'sans-serif'],
-      },
+        'roboto-condensed': ['"Roboto Condensed"', 'sans-serif'],
+       },
       fontWeight: {
-        'ultra-light': '500',
+        'ultra-light': '700',
       },
     },
   },
   plugins: [],
 };
+ 
