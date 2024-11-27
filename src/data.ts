@@ -8,7 +8,7 @@ export const users = {
       platform: "Messenger",
       name: "John Doe",
       username: "john_doe",
-      profile_picture_url: "/images/naruto.jpeg",
+      profile_picture_url: "/images/luffy.jpeg",
       last_interaction_timestamp: "2024-11-25T12:34:56",
     },
     {
@@ -37,7 +37,7 @@ export const ChatData: ChatDataResponse = {
       from: "123456789", //john
       to: "987654321", //jane smith
       content: {
-        text: "Hello! ",
+        text: "Hello friend are you free today?",
         type: "text",
         attachments: [],
         products: [],
@@ -62,7 +62,7 @@ export const ChatData: ChatDataResponse = {
       from: "987654321",
       to: "123456789",
       content: {
-        text: "How are you",
+        text: "I am not free I have some task in pending I need to wrap them up soon.",
         type: "text",
         attachments: [
           {
@@ -105,7 +105,7 @@ export const ChatData: ChatDataResponse = {
       from: "123456789",
       to: "987654321",
       content: {
-        text: "I am fine",
+        text: "Ok, fine then let's meet at night",
         type: "text",
         attachments: [
           {
@@ -145,7 +145,7 @@ export const ChatData: ChatDataResponse = {
       from: "123456789",
       to: "987654321",
       content: {
-        text: "Watch this video it's amzing....",
+        text: "Watch this video it's amzing, give your points on this video.",
         type: "video",
         attachments: [
           {

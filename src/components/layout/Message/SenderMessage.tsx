@@ -47,12 +47,13 @@ export const SenderMessage: React.FC<SenderMessageProps> = ({ message }) => {
 
   return (
     <>
-      <div className="mb-3 flex justify-end  p-1">
+      <div className="mb-3 flex justify-end  p-1 ">
         <div
-          className=" bg-[#f7f7f7] flex items-start relative
-           p-1 max-w-[70%] mr-5 rounded-lg"
+          className="flex flex-col items-start relative
+           p-1 max-w-[70%] mr-5"
         >
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col p-1.5 bg-blue-100 
+          rounded-lg  w-full border border-blue-200">
             <div className="flex group relative">
               {message.reply?.is_reply ? (
                 <div className="p-1 rounded-lg">
@@ -139,14 +140,21 @@ export const SenderMessage: React.FC<SenderMessageProps> = ({ message }) => {
                 </div>
               )}
             </div>
-            <div className="flex items-center justify-end ">
-              <h6 style={{ fontSize: "10px" }} className="text-gray-500">
-                {formattedTime}
-              </h6>
+            <div
+              style={{ fontSize: "11px" }}
+              className="absolute  bg-blue-300 left-4 bottom-7  rounded-xl "
+            >
+              {message.reaction?.emoji}
             </div>
           </div>
-          <div className="absolute  bg-gray-400 left-3 -bottom-2 rounded-xl ">
-            {message.reaction?.emoji}
+          <div
+            className={`flex items-center justify-start  p-1 ${
+              message.reaction?.emoji ? "mt-2" : "mt-1"
+            }`}
+          >
+            <h6 style={{ fontSize: "10px" }} className="text-gray-500">
+              {formattedTime}
+            </h6>
           </div>
         </div>
       </div>

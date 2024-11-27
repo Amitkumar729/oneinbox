@@ -22,8 +22,8 @@ export const ReplyMessage: React.FC<ReplyMessageProps> = ({ onClose }) => {
   if (!replyMessage) return null;
 
   return (
-    <div className="p-1 border flex gap-2 bg-[#f7f7f7] border-gray-700 text-xs max-w-[70%]  rounded-t-md ml-4">
-      <div className="h-auto border ml-1 border-gray-300  "></div>
+    <div className="p-1 border flex gap-2 bg-blue-50 border-blue-100 text-xs max-w-[70%]  rounded-t-md ml-4">
+      <div className="h-auto border ml-1 border-blue-200  "></div>
       <div className="w-full">
         <div className="w-full flex justify-between">
           <div className="rounded-lg p-1 flex w-fit gap-2 items-center justify-around ">

@@ -10,7 +10,9 @@ export const ChatArea: React.FC<ChatAreaProps> = ({ selectedUser }) => (
     {selectedUser ? (
       <>
         <ChatHeader user={selectedUser} />
-        <div className="h-[1px] bg-gray-300" />
+        <div className=" flex items-center justify-center"  >
+        <div className="h-[1px] bg-gray-200 w-[99%] " />
+        </div>
         <div className="flex-1 overflow-auto p-2">
           <ChatBody user={selectedUser} />
         </div>

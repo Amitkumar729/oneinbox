@@ -18,8 +18,8 @@ export const TextReply: React.FC<TextReplyProps> = ({ replyToId }) => {
   if (!replyMessage) return null;
 
   return (
-    <div className="p-1 border flex gap-2 bg-[#ededed] border-grey-300 text-xs max-w-full rounded-md">
-      <div className="h-auto border ml-1 border-gray-300"></div>
+    <div className="p-1 border flex gap-2 bg-white border-grey-300 text-xs max-w-full rounded-md">
+      <div className="h-auto border ml-1 border-blue-100"></div>
       <div className="w-full">
         <div className="w-full flex justify-between">
           <div className="rounded-lg p-1 flex w-fit gap-2 items-center justify-around">

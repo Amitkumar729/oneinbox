@@ -93,7 +93,8 @@ const Toolbar = ({ editor, content }: Props) => {
   ];
 
   return (
-    <div className="px-4 py-3 rounded-br-md rounded-bl-md flex justify-between items-start gap-5 w-full flex-wrap border border-gray-700 bg-[#f7f7f7] ">
+    <div className="px-4 py-3 rounded-br-md rounded-bl-md flex justify-between items-start
+     gap-5 w-full flex-wrap border border-gray-200 bg-gray-100 ">
       <div className="flex justify-start items-center gap-5 w-full lg:w-10/12 flex-wrap">
         {buttonConfigs.map(
           ({ type, command, icon, activeType, customClass }) => (

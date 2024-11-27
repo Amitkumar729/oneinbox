@@ -101,7 +101,7 @@ export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
         <button
           onClick={toggleExpand}
           className="absolute top-4 right-4 text-white
-           bg-black bg-opacity-50 rounded-full p-2"
+           bg-blue-200 bg-opacity-50 rounded-full p-2"
         >
           <X size={24} />
         </button>

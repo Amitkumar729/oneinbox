@@ -102,18 +102,18 @@ export const AudioMessage: React.FC<AudioMessageProps> = ({ message }) => {
         <button
           onClick={toggleExpand}
           className="absolute top-4 right-4 text-white
-           bg-black bg-opacity-50 rounded-full p-2"
+           bg-blue-200 bg-opacity-50 rounded-full p-2"
         >
           <X size={24} />
         </button>
 
         {/* Expanded Audio Container */}
         <div
-          className="relative w-full max-w-2xl bg-white/10 
-        rounded-lg p-6 flex items-center space-x-4"
+          className="relative w-full max-w-2xl bg-blue-100 
+        rounded-lg p-6 flex items-center space-x-4 border border-blue-300 "
         >
           {/* Music Icon */}
-          <div className="bg-white/20 rounded-full p-4">
+          <div className="bg-blue-200 items-center justify-center rounded-full p-4">
             <Music size={48} className="text-white" />
           </div>
 
@@ -135,7 +135,7 @@ export const AudioMessage: React.FC<AudioMessageProps> = ({ message }) => {
     <div>
       <div className="mb-2">
         <div
-          className="bg-[#f7f7f7] flex-col items-start 
+          className="bg-blue-200 flex-col items-start 
         p-1  w-fit rounded-lg relative"
         >
           {/* Audio Content */}
@@ -144,7 +144,7 @@ export const AudioMessage: React.FC<AudioMessageProps> = ({ message }) => {
               {/* Audio Player */}
               <div className="relative w-[300px]">
                 {/* Music Icon */}
-                <div className="bg-gray-200 rounded-full p-3 mx-auto w-fit mb-2">
+                <div className="bg-blue-300 rounded-full p-3 mx-auto w-fit mb-2">
                   <Music size={24} className="text-gray-600" />
                 </div>
 

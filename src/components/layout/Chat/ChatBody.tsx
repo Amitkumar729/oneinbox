@@ -54,7 +54,7 @@ export const ChatBody: React.FC<ChatBodyProps> = ({ user }) => {
 
       {messages.map((message) => (
         <div className="  mb-3   flex justify-end" key={message.id}>
-          <div className=" bg-[#f7f7f7] flex items-start p-1 max-w-[70%] mr-5 rounded-lg">
+          <div className=" bg-blue-100 border border-blue-200 flex items-start p-1 max-w-[70%] mr-5 rounded-lg">
             <div className="flex flex-col w-full">
               <div className="flex items-center justify-end"></div>
               <div className="flex group">
