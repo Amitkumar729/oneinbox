@@ -47,7 +47,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
   }, [editor]);
 
   return (
-    <div className="relative w-full px-4">
+    <div className="relative   px-4 w-[98%] ">
       <div className="relative ">
         {!isFocused && !content && (
           <div className="absolute left-4 top-3 text-gray-700 pointer-events-none">

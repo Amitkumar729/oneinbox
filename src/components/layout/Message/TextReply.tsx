@@ -3,7 +3,7 @@ import { ChatData, users } from "../../../data";
 import { TextReplyProps } from "../../../types";
 
 export const TextReply: React.FC<TextReplyProps> = ({ replyToId }) => {
-  console.log("replyToId:", replyToId);
+  // console.log("replyToId:", replyToId);
 
   const replyMessage = ChatData.data.find(
     (chat) => chat.message_id === replyToId

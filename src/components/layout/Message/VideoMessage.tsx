@@ -126,12 +126,6 @@ export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
           {/* Video Content */}
           <div className="flex flex-col w-full">
             <div className="flex group relative">
-              {/* {message.reply?.is_reply ? (
-                <div className="p-1 rounded-lg">
-                  <TextReply replyToId={message.reply.reply_to} />
-                </div>
-              ) : null} */}
-
               {/* Video Player */}
               <div className="relative w-[300px]">
                 <video
