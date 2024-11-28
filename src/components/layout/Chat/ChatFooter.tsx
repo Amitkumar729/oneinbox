@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { addMessage, clearReplyTarget } from "../../store/reducers/chatSlice";
 import { ReplyMessage } from "../Message/Replymessage";
-import { ChatFooterProps, Message } from "../../../types";
+import { ChatFooterProps, ChatMessage } from "../../../types";
 
 export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
-  const [content, setContent] = useState<string>("");
+  const [textContent, setTextContent] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
   const dispatch = useDispatch();
   const editorRef = useRef<any>(null);
 
@@ -21,21 +22,28 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (content.trim()) {
-      const newMessage: Message = {
-        id: Date.now(),
-        content,
-        type: replyTarget ? "reply" : "message",
-        replyTo: replyTarget ? replyToId : undefined,
-      };
 
-      dispatch(addMessage(newMessage));
-      setContent("");
-      dispatch(clearReplyTarget());
+    if (!textContent && !imageUrl) {
+      return;
+    }
 
-      if (editorRef.current) {
-        editorRef.current.clearContent();
-      }
+    const newMessage: ChatMessage = {
+      id: Date.now(),
+      content: {
+        text: textContent,
+        image: imageUrl,
+      },
+      type: replyTarget ? "reply" : "message",
+      replyTo: replyTarget ? replyToId : undefined,
+    };
+
+    dispatch(addMessage(newMessage));
+    setTextContent("");
+    setImageUrl("");
+    dispatch(clearReplyTarget());
+
+    if (editorRef.current) {
+      editorRef.current.clearContent();
     }
   };
 
@@ -45,8 +53,8 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
       <form onSubmit={handleSubmit}>
         <Tiptap
           ref={editorRef}
-          content={content}
-          onChange={(newContent: string) => setContent(newContent)}
+          content={textContent}
+          onChange={(newContent: string) => setTextContent(newContent)}
           placeholder={placeholder}
         />
       </form>

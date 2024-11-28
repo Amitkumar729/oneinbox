@@ -1,16 +1,27 @@
 export interface ChatMessage {
-  id: string;
-  from: string;
-  to: string;
-  flow: string;
-  time: string;
-  status: string;
-  messageType: string;
-  messageID: string;
-  replyTo: string;
-  isReply: number;
-  message: string;
+  id: number;
+  content: {
+    text: string;
+    image: string | null;
+  };
+  type: "message" | "reply" | "image";
+  replyTo?: string;
 }
+export interface ChatState {
+  messages: ChatMessage[];
+  replyTarget: boolean;
+  replyToId?: string;
+}
+
+export interface ButtonConfig {
+  type: string;
+  command: () => void;
+  icon: JSX.Element;
+  activeType?: string;
+  customClass?: string;
+  ariaLabel: string;
+}
+
 
 export type PlatformName = "Messenger" | "Instagram" | "Telegram" | "WhatsApp";
 
@@ -86,9 +97,7 @@ export interface Referral {
   referrer_url: string;
 }
 
-export interface QuickReply {
-   
-}
+export interface QuickReply {}
 
 export interface Metadata {
   platform: string;
@@ -112,13 +121,12 @@ export interface ReceiverMessageProps {
   message: ChatMessages;
 }
 
-
 export interface AudioMessageProps {
   message: ChatMessages;
 }
 
 export interface VideoMessageProps {
-  message: ChatMessages
+  message: ChatMessages;
 }
 
 export interface ImageMessageProps {
@@ -141,13 +149,6 @@ export interface ChatFooterProps {
   placeholder: string;
 }
 
-export interface Message {
-  id: number;
-  content: string;
-  type: "message" | "reply";
-  replyTo?: string;
-}
-
 export interface ChatHeaderProps {
   user: User;
 }
@@ -159,7 +160,6 @@ export interface DateSeparatorProps {
 export interface TextReplyProps {
   replyToId: string;
 }
-
 
 export interface UserItemProps {
   user: User;

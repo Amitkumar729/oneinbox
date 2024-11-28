@@ -45,10 +45,10 @@ export const SenderMessage: React.FC<SenderMessageProps> = ({ message }) => {
       <div className="mb-3 flex justify-end  p-1 ">
         <div
           className="flex flex-col items-start relative
-           p-1 max-w-[70%] mr-5"
+           p-1 max-w-[55%] mr-5"
         >
           <div
-            className="flex flex-col p-1.5 bg-blue-100 
+            className="flex flex-col p-2 bg-blue-100 
                    rounded-lg  w-full border border-blue-200"
           >
             <div className="flex group relative">
@@ -71,7 +71,7 @@ export const SenderMessage: React.FC<SenderMessageProps> = ({ message }) => {
               )}
             </div>
             <div
-              style={{ fontSize: "11px" }}
+              style={{ fontSize: "13px" }}
               className="absolute  bg-blue-300 left-4 bottom-7  rounded-xl "
             >
               {message.reaction?.emoji}

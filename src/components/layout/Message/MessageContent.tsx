@@ -12,7 +12,7 @@ export const MessageContent: React.FC<{ message: any }> = ({ message }) => {
     return (
       <div className="p-1 rounded-lg">
         <TextReply replyToId={message.reply.reply_to} />
-        <p style={{ fontSize: "11px" }} className="text-sm border">
+        <p className="text-sm border">
           <ReactMarkdown
             children={message.content.text}
             remarkPlugins={[remarkGfm]}

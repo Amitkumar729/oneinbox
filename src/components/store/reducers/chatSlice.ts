@@ -1,18 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
- 
-interface ChatMessage {
-  id: number;
-  content: string;
-  type: "message" | "reply";
-  replyTo?: string;
-}
-
-interface ChatState {
-  messages: ChatMessage[];
-  replyTarget: boolean;
-  replyToId?: string;  
-}
+import { ChatMessage, ChatState } from "../../../types";
 
 const initialState: ChatState = {
   messages: [],
@@ -37,5 +24,6 @@ const chatSlice = createSlice({
   },
 });
 
-export const { addMessage, setReplyTarget, clearReplyTarget } = chatSlice.actions;
+export const { addMessage, setReplyTarget, clearReplyTarget } =
+  chatSlice.actions;
 export default chatSlice.reducer;
