@@ -5,6 +5,7 @@ import Underline from "@tiptap/extension-underline";
 import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import { customMarkdownSerializer } from "./customMarkdownSerializer";
 import Image from "@tiptap/extension-image";
+import { Video } from "./VideoNode";
 
 const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -24,21 +25,58 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
     reader.readAsDataURL(file);
   };
 
+  const handleVideoUpload = async (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) { 
+        editor
+          ?.chain()
+          .focus()
+          .setVideo({ src: reader.result.toString(), controls: true })
+          .run();
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const extractPlainText = (content: any[]): string => {
+    return content
+      .map((node: any) => {
+        if (node.type === "text") {
+          return node.text;
+        }
+
+        if (node.content) {
+          return extractPlainText(node.content);
+        }
+
+        return "";
+      })
+      .join(" ");
+  };
+
   const handleChange = () => {
     if (!editor) return;
     const doc = editor?.state.doc;
     const markdownContent = customMarkdownSerializer.serialize(doc);
-    // console.log("markDown::", markdownContent);
+
+    const plainText = extractPlainText(editor.getJSON().content || []).trim();
+
     const imageNodes = editor
       ?.getJSON()
       ?.content?.filter((node: any) => node.type === "image");
     const imageUrl = imageNodes?.map((node: any) => node.attrs.src) || [];
 
-    const cleanedMarkdownContent = markdownContent.replace(/!\[.*?\]\(data:image.*?\)/g, "").trim();
+    const videoNodes = editor
+      ?.getJSON()
+      ?.content?.filter((node: any) => node.type === "video");
+    const videoUrl = videoNodes?.map((node: any) => node.attrs.src) || [];
 
     onChange({
-      text: cleanedMarkdownContent || null,
+      text: markdownContent.trim(),
+      markdownContent,
       imageUrl,
+      videoUrl,
     });
   };
 
@@ -75,6 +113,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
           ];
         },
       }),
+      Video,
     ],
     editorProps: {
       attributes: {
@@ -85,7 +124,6 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
     onUpdate: handleChange,
     content,
   });
-  
 
   //  clearContent method via ref for the editor
   useImperativeHandle(ref, () => ({
@@ -124,6 +162,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
         editor={editor}
         content={content}
         handleImageUpload={handleImageUpload}
+        handleVideoUpload={handleVideoUpload}
       />
     </div>
   );

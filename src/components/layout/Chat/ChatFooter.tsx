@@ -9,6 +9,7 @@ import { ChatFooterProps, ChatMessage } from "../../../types";
 export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
   const [textContent, setTextContent] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
+  const [videoUrl, setVideoUrl] = useState<string>("");
   const dispatch = useDispatch();
   const editorRef = useRef<any>(null);
 
@@ -23,7 +24,7 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!textContent && !imageUrl) {
+    if (!textContent && !imageUrl && !videoUrl) {
       return;
     }
 
@@ -32,6 +33,7 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
       content: {
         text: textContent,
         image: imageUrl,
+        video: videoUrl,
       },
       type: replyTarget ? "reply" : "message",
       replyTo: replyTarget ? replyToId : undefined,
@@ -40,6 +42,7 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
     dispatch(addMessage(newMessage));
     setTextContent("");
     setImageUrl("");
+    setVideoUrl("");
     dispatch(clearReplyTarget());
 
     if (editorRef.current) {

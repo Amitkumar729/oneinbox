@@ -7,23 +7,31 @@ type ToolbarProps = {
   editor: Editor | null;
   content: string;
   handleImageUpload: (file: File) => void;
+  handleVideoUpload: (file: File) => void;
 };
 
 const Toolbar: React.FC<ToolbarProps> = ({
   editor,
   content,
   handleImageUpload,
+  handleVideoUpload,
 }) => {
   if (!editor) return null;
 
-  const handleImageUploadClick = () => {
+  const handleFileUpload = () => {
     const input = document.createElement("input");
     input.type = "file";
-    input.accept = "image/*";
+    input.accept = "image/*,video/*";
     input.onchange = (event) => {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
-        handleImageUpload(file);
+        if (file.type.startsWith("image/")) {
+          handleImageUpload(file);
+        } else if (file.type.startsWith("video/")) {
+          handleVideoUpload(file);
+        } else {
+          console.error("Unsupported file type:", file.type);
+        }
       }
     };
     input.click();
@@ -54,7 +62,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
             </button>
           )
         )}
-        <button onClick={handleImageUploadClick} aria-label="Insert Image">
+        <button onClick={handleFileUpload} aria-label="Insert Image">
           <Link size={17} />
         </button>
       </div>

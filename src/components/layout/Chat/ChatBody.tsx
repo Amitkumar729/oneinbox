@@ -3,7 +3,7 @@ import { DateSeparator } from "./DateSeparator";
 import { ReceiverMessage } from "../Message/ReceiverMessage";
 import { SenderMessage } from "../Message/SenderMessage";
 import { ChatData } from "../../../data";
-import EditorMessage from "../Message/EditorMessage";
+import EditorMessage from "../Editor/EditorMessage";
 
 export const ChatBody: React.FC = () => {
   return (

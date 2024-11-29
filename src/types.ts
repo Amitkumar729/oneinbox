@@ -2,7 +2,8 @@ export interface ChatMessage {
   id: number;
   content: {
     text: string;
-    image: string | null;
+    image: string[] | null;
+    video: string[] | null;
   };
   type: "message" | "reply" | "image";
   replyTo?: string;
@@ -21,7 +22,6 @@ export interface ButtonConfig {
   customClass?: string;
   ariaLabel: string;
 }
-
 
 export type PlatformName = "Messenger" | "Instagram" | "Telegram" | "WhatsApp";
 
@@ -127,6 +127,10 @@ export interface AudioMessageProps {
 
 export interface VideoMessageProps {
   message: ChatMessages;
+}
+
+export interface EditorContentProps {
+  messages: ChatMessage;
 }
 
 export interface ImageMessageProps {

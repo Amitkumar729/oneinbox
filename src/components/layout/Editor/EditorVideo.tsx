@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Play, Pause, Maximize2, X } from "lucide-react";
-import { VideoMessageProps } from "../../../types";
+import { EditorContentProps } from "@tiptap/react";
 
-export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
+export const EditorVideoMessage: React.FC<EditorContentProps> = ({
+  messages,
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
+
+  const videoUrl = messages.content.text.videoUrl[0];
 
   const toggleVideoPlay = () => {
     if (videoRef.current) {
@@ -85,8 +89,6 @@ export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
       .padStart(2, "0")}`;
   };
 
-  const messageUrl1 = message.content.attachments[0].url;
-
   if (isExpanded) {
     return (
       <div
@@ -112,7 +114,7 @@ export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
         <div className="relative w-full max-w-4xl">
           <video
             ref={videoRef}
-            src={messageUrl1}
+            src={videoUrl}
             className="w-full max-h-[80vh] rounded-lg"
             controls
           />
@@ -132,7 +134,7 @@ export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
               <div className="relative w-[300px]">
                 <video
                   ref={videoRef}
-                  src={messageUrl1}
+                  src={videoUrl}
                   className="max-w-[300px] max-h-[400px] rounded-t-lg"
                 />
 

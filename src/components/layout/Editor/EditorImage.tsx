@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { Maximize2, X } from "lucide-react";
-import { ImageMessageProps } from "../../../types";
+import {   X } from "lucide-react";
+import { EditorContentProps } from "@tiptap/react";
 
-export const ImageMessage: React.FC<ImageMessageProps> = ({ message }) => {
+export const EditorImageMessage: React.FC<EditorContentProps> = ({
+  messages,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const imageUrl = messages.content.text.imageUrl[0];
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -33,7 +37,7 @@ export const ImageMessage: React.FC<ImageMessageProps> = ({ message }) => {
         {/* Expanded Image Container */}
         <div className="relative w-full max-w-4xl">
           <img
-            src={message.content.attachments[0].url}
+            src={imageUrl}
             alt="Expanded Image"
             className="w-full max-h-[80vh] rounded-lg object-contain"
           />
@@ -53,7 +57,7 @@ export const ImageMessage: React.FC<ImageMessageProps> = ({ message }) => {
               <div className="relative w-[300px] cursor-pointer">
                 <img
                   onClick={toggleExpand}
-                  src={message.content.attachments[0].url}
+                  src={imageUrl}
                   alt="Shared Image"
                   className="max-w-[300px] max-h-[400px] rounded-lg object-cover"
                 />

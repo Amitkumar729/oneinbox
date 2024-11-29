@@ -1,12 +1,25 @@
-import { MarkdownSerializer, defaultMarkdownSerializer } from "prosemirror-markdown";
+import {
+  MarkdownSerializer,
+  defaultMarkdownSerializer,
+} from "prosemirror-markdown";
 
- 
 export const customMarkdownSerializer = new MarkdownSerializer(
   {
-    ...defaultMarkdownSerializer.nodes,  
+    ...defaultMarkdownSerializer.nodes,
+    video(state, node) { 
+      const { src, alt = "", title = "" } = node.attrs;
+      const altText = alt ? `[${alt}]` : "[]";
+      const titleText = title ? ` "${title}"` : "";
+      state.write(`!video${altText}(${src}${titleText})`);
+      state.write(`!video${altText}(${src}${titleText})`);
+    },
+    text(state, node) {
+      if (node.type.name !== "video") {
+        state.text(node.text || "", false);
+      }
+    },
   },
   {
-   
     bold: {
       open: "**",
       close: "**",
@@ -20,7 +33,7 @@ export const customMarkdownSerializer = new MarkdownSerializer(
       expelEnclosingWhitespace: true,
     },
     underline: {
-      open: "<u>",  
+      open: "<u>",
       close: "</u>",
       mixable: true,
     },
