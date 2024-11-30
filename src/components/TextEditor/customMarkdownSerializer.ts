@@ -11,12 +11,9 @@ export const customMarkdownSerializer = new MarkdownSerializer(
       const altText = alt ? `[${alt}]` : "[]";
       const titleText = title ? ` "${title}"` : "";
       state.write(`!video${altText}(${src}${titleText})`);
-      state.write(`!video${altText}(${src}${titleText})`);
     },
     text(state, node) {
-      if (node.type.name !== "video") {
-        state.text(node.text || "", false);
-      }
+      state.text(node.text || "", false);
     },
   },
   {

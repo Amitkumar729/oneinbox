@@ -28,7 +28,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
   const handleVideoUpload = async (file: File) => {
     const reader = new FileReader();
     reader.onload = () => {
-      if (reader.result) { 
+      if (reader.result) {
         editor
           ?.chain()
           .focus()
@@ -39,28 +39,10 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
     reader.readAsDataURL(file);
   };
 
-  const extractPlainText = (content: any[]): string => {
-    return content
-      .map((node: any) => {
-        if (node.type === "text") {
-          return node.text;
-        }
-
-        if (node.content) {
-          return extractPlainText(node.content);
-        }
-
-        return "";
-      })
-      .join(" ");
-  };
-
   const handleChange = () => {
     if (!editor) return;
     const doc = editor?.state.doc;
     const markdownContent = customMarkdownSerializer.serialize(doc);
-
-    const plainText = extractPlainText(editor.getJSON().content || []).trim();
 
     const imageNodes = editor
       ?.getJSON()
@@ -72,9 +54,11 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
       ?.content?.filter((node: any) => node.type === "video");
     const videoUrl = videoNodes?.map((node: any) => node.attrs.src) || [];
 
+    const cleanedMarkdownContent = markdownContent
+      .replace(/!video(\[.*?\])?\(.*?\)/g, "")
+      .trim();
     onChange({
-      text: markdownContent.trim(),
-      markdownContent,
+      text: cleanedMarkdownContent,
       imageUrl,
       videoUrl,
     });
