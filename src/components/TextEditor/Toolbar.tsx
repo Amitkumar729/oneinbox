@@ -8,6 +8,7 @@ type ToolbarProps = {
   content: string;
   handleImageUpload: (file: File) => void;
   handleVideoUpload: (file: File) => void;
+  handleAudioUpload: (file: File) => void;
 };
 
 const Toolbar: React.FC<ToolbarProps> = ({
@@ -15,13 +16,14 @@ const Toolbar: React.FC<ToolbarProps> = ({
   content,
   handleImageUpload,
   handleVideoUpload,
+  handleAudioUpload,
 }) => {
   if (!editor) return null;
 
   const handleFileUpload = () => {
     const input = document.createElement("input");
     input.type = "file";
-    input.accept = "image/*,video/*";
+    input.accept = "image/*,video/*,audio/*";
     input.onchange = (event) => {
       const file = (event.target as HTMLInputElement).files?.[0];
       if (file) {
@@ -29,6 +31,8 @@ const Toolbar: React.FC<ToolbarProps> = ({
           handleImageUpload(file);
         } else if (file.type.startsWith("video/")) {
           handleVideoUpload(file);
+        } else if (file.type.startsWith("audio/")) {
+          handleAudioUpload(file);
         } else {
           console.error("Unsupported file type:", file.type);
         }

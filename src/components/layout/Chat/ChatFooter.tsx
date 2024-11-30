@@ -10,6 +10,7 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
   const [textContent, setTextContent] = useState<string>("");
   const [imageUrl, setImageUrl] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState<string>("");
+  const [audioUrl, setAudioUrl] = useState<string>("");
   const dispatch = useDispatch();
   const editorRef = useRef<any>(null);
 
@@ -34,6 +35,7 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
         text: textContent,
         image: imageUrl,
         video: videoUrl,
+        audio: audioUrl,
       },
       type: replyTarget ? "reply" : "message",
       replyTo: replyTarget ? replyToId : undefined,
@@ -43,6 +45,7 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
     setTextContent("");
     setImageUrl("");
     setVideoUrl("");
+    setAudioUrl("");
     dispatch(clearReplyTarget());
 
     if (editorRef.current) {

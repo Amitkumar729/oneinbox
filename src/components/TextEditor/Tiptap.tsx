@@ -6,6 +6,7 @@ import { useEffect, useState, useImperativeHandle, forwardRef } from "react";
 import { customMarkdownSerializer } from "./customMarkdownSerializer";
 import Image from "@tiptap/extension-image";
 import { Video } from "./VideoNode";
+import { Audio } from "./AudioNode";
 
 const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -38,6 +39,19 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
     };
     reader.readAsDataURL(file);
   };
+  const handleAudioUpload = async (file: File) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result) {
+        editor
+          ?.chain()
+          .focus()
+          .setAudio({ src: reader.result.toString(), controls: true })
+          .run();
+      }
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleChange = () => {
     if (!editor) return;
@@ -54,13 +68,19 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
       ?.content?.filter((node: any) => node.type === "video");
     const videoUrl = videoNodes?.map((node: any) => node.attrs.src) || [];
 
+    const audioNodes = editor
+      ?.getJSON()
+      ?.content?.filter((node: any) => node.type === "audio");
+    const audioUrl = audioNodes?.map((node: any) => node.attrs.src) || [];
+
     const cleanedMarkdownContent = markdownContent
-      .replace(/!video(\[.*?\])?\(.*?\)/g, "")
+      .replace(/!video(\[.*?\])?\(.*?\)|!audio(\[.*?\])?\(.*?\)/g, "")
       .trim();
     onChange({
       text: cleanedMarkdownContent,
       imageUrl,
       videoUrl,
+      audioUrl,
     });
   };
 
@@ -98,6 +118,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
         },
       }),
       Video,
+      Audio,
     ],
     editorProps: {
       attributes: {
@@ -147,6 +168,7 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
         content={content}
         handleImageUpload={handleImageUpload}
         handleVideoUpload={handleVideoUpload}
+        handleAudioUpload={handleAudioUpload}
       />
     </div>
   );

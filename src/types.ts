@@ -4,8 +4,9 @@ export interface ChatMessage {
     text: string;
     image: string[] | null;
     video: string[] | null;
+    audio: string[] | null;
   };
-  type: "message" | "reply" | "image";
+  type: "message" | "reply";
   replyTo?: string;
 }
 export interface ChatState {

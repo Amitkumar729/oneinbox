@@ -12,6 +12,12 @@ export const customMarkdownSerializer = new MarkdownSerializer(
       const titleText = title ? ` "${title}"` : "";
       state.write(`!video${altText}(${src}${titleText})`);
     },
+    audio(state, node) {
+      const { src, alt = "", title = "" } = node.attrs;
+      const altText = alt ? `[${alt}]` : "[]";
+      const titleText = title ? ` "${title}"` : "";
+      state.write(`!audio${altText}(${src}${titleText})`);
+    },
     text(state, node) {
       state.text(node.text || "", false);
     },
