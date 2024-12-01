@@ -3,7 +3,11 @@ import { format, isToday, isYesterday } from "date-fns";
 import { platformIcons } from "../../../data";
 import { UserItemProps } from "../../../types";
 
-export const UserItem: React.FC<UserItemProps> = ({ user, onUserSelect }) => {
+export const UserItem: React.FC<UserItemProps> = ({
+  user,
+  onUserSelect,
+  isSelected,
+}) => {
   const lastInteraction = new Date(user.last_interaction_timestamp);
   let formattedTime: string;
 
@@ -17,8 +21,9 @@ export const UserItem: React.FC<UserItemProps> = ({ user, onUserSelect }) => {
 
   return (
     <div
-      className="flex p-2 items-center hover:bg-gray-200 
-           rounded-md cursor-pointer mb-1"
+      className={`flex p-2 items-center rounded-md cursor-pointer mb-1 ${
+        isSelected ? "bg-gray-200" : "hover:bg-gray-200"
+      }`}
       onClick={() => onUserSelect(user)}
     >
       <div className="relative">

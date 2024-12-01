@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SidebarHeader } from "./SidebarHeader";
 import { users } from "../../../data";
 import { User } from "../../../types";
@@ -7,6 +7,13 @@ import { UserItem } from "./UserItem";
 export const Sidebar: React.FC<{ onUserSelect: (user: User) => void }> = ({
   onUserSelect,
 }) => {
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+
+  const handleUserSelect = (user: User) => {
+    setSelectedUserId(user.user_id);
+    onUserSelect(user);
+  };
+
   return (
     <div>
       <div
@@ -25,7 +32,8 @@ export const Sidebar: React.FC<{ onUserSelect: (user: User) => void }> = ({
                   <UserItem
                     key={user.user_id}
                     user={user}
-                    onUserSelect={onUserSelect}
+                    onUserSelect={handleUserSelect}
+                    isSelected={user.user_id === selectedUserId}
                   />
                 ))}
               </div>

@@ -169,4 +169,5 @@ export interface TextReplyProps {
 export interface UserItemProps {
   user: User;
   onUserSelect: (user: User) => void;
+  isSelected: boolean;
 }
