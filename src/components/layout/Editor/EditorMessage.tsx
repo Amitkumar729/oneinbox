@@ -6,7 +6,7 @@ import { setReplyTarget } from "../../store/reducers/chatSlice";
 import { format } from "date-fns";
 import EditorMessageContent from "./EditorMessageContent";
 
-const EditorMessage: React.FC = () => {
+export const EditorMessage: React.FC = () => {
   const dispatch = useDispatch();
   const messages = useSelector((state: RootState) => state.chat.messages);
 
@@ -55,5 +55,3 @@ const EditorMessage: React.FC = () => {
     </div>
   );
 };
-
-export default EditorMessage;

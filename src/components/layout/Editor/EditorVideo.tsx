@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Play, Pause, Maximize2, X } from "lucide-react";
-import { EditorContentProps } from "@tiptap/react";
+import { EditorContentProps } from "../../../types";
 
 export const EditorVideoMessage: React.FC<EditorContentProps> = ({
-  messages,
+  message,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -12,7 +12,7 @@ export const EditorVideoMessage: React.FC<EditorContentProps> = ({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
 
-  const videoUrl = messages.content.text.videoUrl[0];
+  const videoUrl = message.content.text.videoUrl[0] || [];
 
   const toggleVideoPlay = () => {
     if (videoRef.current) {

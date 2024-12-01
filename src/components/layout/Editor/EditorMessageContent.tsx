@@ -9,7 +9,9 @@ import { TextReply } from "../Message/TextReply";
 import { EditorAudioMessage } from "./EditorAudio";
 
 const EditorMessageContent: React.FC<EditorContentProps> = ({ message }) => {
-  const imageUrl = message.content.text.imageUrl[0];
+  const imageUrl = message.content.text?.imageUrl || [];
+  const videoUrl = message.content.text?.videoUrl || [];
+  const audioUrl = message.content.text?.audioUrl || [];
 
   return (
     <>
@@ -37,20 +39,18 @@ const EditorMessageContent: React.FC<EditorContentProps> = ({ message }) => {
           </div>
           <div className="rounded-lg w-[300px] ">
             {imageUrl && imageUrl.length > 0 && (
-              <EditorImageMessage messages={message} />
+              <EditorImageMessage message={message} />
             )}
           </div>
           <div className="rounded-lg w-[300px] ">
-            {message.content.text?.videoUrl &&
-              message.content.text.videoUrl.length > 0 && (
-                <EditorVideoMessage messages={message} />
-              )}
+            {videoUrl && videoUrl.length > 0 && (
+              <EditorVideoMessage message={message} />
+            )}
           </div>
           <div className="rounded-lg w-[300px] ">
-            {message.content.text?.audioUrl &&
-              message.content.text.audioUrl.length > 0 && (
-                <EditorAudioMessage message={message} />
-              )}
+            {audioUrl && audioUrl.length > 0 && (
+              <EditorAudioMessage message={message} />
+            )}
           </div>
         </div>
       )}

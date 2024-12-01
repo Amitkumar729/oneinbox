@@ -1,6 +1,15 @@
-import { ChatDataResponse } from "./types";
+import { ChatDataResponse, PlatformName, UsersResponse } from "./types";
 
-export const users = {
+
+export const platformIcons: Record<PlatformName, string> = {
+  Messenger: "/channelIcons/telegram.png",
+  Instagram: "/channelIcons/instagram.png",
+  Telegram: "/channelIcons/telegram.png",
+  WhatsApp: "/channelIcons/whatsapp.png",
+};
+
+
+export const users: UsersResponse = {
   status: "success",
   data: [
     {

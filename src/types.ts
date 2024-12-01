@@ -2,9 +2,9 @@ export interface ChatMessage {
   id: number;
   content: {
     text: string;
-    image: string[] | null;
-    video: string[] | null;
-    audio: string[] | null;
+    image?: string[] | null;
+    video?: string[] | null;
+    audio?: string[] | null;
   };
   type: "message" | "reply";
   replyTo?: string;
@@ -131,7 +131,7 @@ export interface VideoMessageProps {
 }
 
 export interface EditorContentProps {
-  messages: ChatMessage;
+  message: ChatMessage;
 }
 
 export interface ImageMessageProps {
@@ -170,10 +170,3 @@ export interface UserItemProps {
   user: User;
   onUserSelect: (user: User) => void;
 }
-
-export const platformIcons: Record<PlatformName, string> = {
-  Messenger: "/channelIcons/telegram.png",
-  Instagram: "/channelIcons/instagram.png",
-  Telegram: "/channelIcons/telegram.png",
-  WhatsApp: "/channelIcons/whatsapp.png",
-};

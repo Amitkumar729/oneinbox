@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import {   X } from "lucide-react";
-import { EditorContentProps } from "@tiptap/react";
+import { X } from "lucide-react";
+import { EditorContentProps } from "../../../types";
 
 export const EditorImageMessage: React.FC<EditorContentProps> = ({
-  messages,
+  message,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const imageUrl = messages.content.text.imageUrl[0];
+  const imageUrl = message.content.text.imageUrl[0] || [];
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);

@@ -1,9 +1,27 @@
-import React from "react";
-import { DateSeparator } from "./DateSeparator";
-import { ReceiverMessage } from "../Message/ReceiverMessage";
-import { SenderMessage } from "../Message/SenderMessage";
+import React, { lazy, Suspense } from "react";
 import { ChatData } from "../../../data";
-import EditorMessage from "../Editor/EditorMessage";
+import { Loader } from "../../loaders/loader";
+
+const DateSeparator = lazy(() =>
+  import("./DateSeparator").then((module) => ({
+    default: module.DateSeparator,
+  }))
+);
+const ReceiverMessage = lazy(() =>
+  import("../Message/ReceiverMessage").then((module) => ({
+    default: module.ReceiverMessage,
+  }))
+);
+const SenderMessage = lazy(() =>
+  import("../Message/SenderMessage").then((module) => ({
+    default: module.SenderMessage,
+  }))
+);
+const EditorMessage = lazy(() =>
+  import("../Editor/EditorMessage").then((module) => ({
+    default: module.EditorMessage,
+  }))
+);
 
 export const ChatBody: React.FC = () => {
   return (
@@ -20,21 +38,25 @@ export const ChatBody: React.FC = () => {
 
           return (
             <React.Fragment key={chat.message_id}>
-              {currentDate !== previousDate && (
-                <DateSeparator date={chat.metadata.timestamp} />
-              )}
+              <Suspense fallback={<Loader />}>
+                {currentDate !== previousDate && (
+                  <DateSeparator date={chat.metadata.timestamp} />
+                )}
 
-              {chat.metadata.flow === "Incoming" ? (
-                <ReceiverMessage message={chat} />
-              ) : (
-                <SenderMessage message={chat} />
-              )}
+                {chat.metadata.flow === "Incoming" ? (
+                  <ReceiverMessage message={chat} />
+                ) : (
+                  <SenderMessage message={chat} />
+                )}
+              </Suspense>
             </React.Fragment>
           );
         })}
       </div>
 
-      <EditorMessage />
+      <Suspense fallback={<div>Loading Editor...</div>}>
+        <EditorMessage />
+      </Suspense>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Maximize2, X } from "lucide-react";
+import { X } from "lucide-react";
 import { ImageMessageProps } from "../../../types";
 
 export const ImageMessage: React.FC<ImageMessageProps> = ({ message }) => {

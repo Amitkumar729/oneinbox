@@ -8,9 +8,9 @@ import { ChatFooterProps, ChatMessage } from "../../../types";
 
 export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
   const [textContent, setTextContent] = useState<string>("");
-  const [imageUrl, setImageUrl] = useState<string>("");
-  const [videoUrl, setVideoUrl] = useState<string>("");
-  const [audioUrl, setAudioUrl] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string[] | null>(null);
+  const [videoUrl, setVideoUrl] = useState<string[] | null>(null);
+  const [audioUrl, setAudioUrl] = useState<string[] | null>(null);
   const dispatch = useDispatch();
   const editorRef = useRef<any>(null);
 
@@ -43,9 +43,9 @@ export const ChatFooter: React.FC<ChatFooterProps> = ({ placeholder }) => {
 
     dispatch(addMessage(newMessage));
     setTextContent("");
-    setImageUrl("");
-    setVideoUrl("");
-    setAudioUrl("");
+    setImageUrl(null);
+    setVideoUrl(null);
+    setAudioUrl(null);
     dispatch(clearReplyTarget());
 
     if (editorRef.current) {
