@@ -1,8 +1,8 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { setReplyTarget } from "../../store/reducers/chatSlice";
+import { RootState } from "../../../store/store";
+import { setReplyTarget } from "../../../store/reducers/chatSlice";
 import { format } from "date-fns";
 import EditorMessageContent from "./EditorMessageContent";
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { setReplyTarget } from "../../store/reducers/chatSlice";
+import { setReplyTarget } from "../../../store/reducers/chatSlice";
 import { format } from "date-fns";
 import { ReceiverMessageProps } from "../../../types";
 import { MessageContent } from "./MessageContent";
@@ -61,6 +61,7 @@ export const ReceiverMessage: React.FC<ReceiverMessageProps> = ({
                   replyMenuRef={replyMenuRef}
                   messageId={message.message_id}
                   handleReplyClick={handleReplyClick}
+                  flow="incoming"
                 />
               )}
             </div>
@@ -69,7 +70,7 @@ export const ReceiverMessage: React.FC<ReceiverMessageProps> = ({
         {message.reaction?.emoji && (
           <div
             style={{ fontSize: "13px" }}
-            className="absolute bg-blue-200 left-3 -bottom-2 rounded-xl"
+            className="absolute bg-blue-300 left-3 -bottom-2 rounded-xl"
           >
             {message.reaction.emoji}
           </div>

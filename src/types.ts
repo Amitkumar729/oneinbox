@@ -122,20 +122,12 @@ export interface ReceiverMessageProps {
   message: ChatMessages;
 }
 
-export interface AudioMessageProps {
-  message: ChatMessages;
-}
-
 export interface VideoMessageProps {
   message: ChatMessages;
 }
 
 export interface EditorContentProps {
   message: ChatMessage;
-}
-
-export interface ImageMessageProps {
-  message: ChatMessages;
 }
 
 export interface ReplyMessageProps {
@@ -170,4 +162,11 @@ export interface UserItemProps {
   user: User;
   onUserSelect: (user: User) => void;
   isSelected: boolean;
+}
+
+export interface ReplyMenuProps {
+  replyMenuRef: React.RefObject<HTMLDivElement>;
+  messageId: string;
+  handleReplyClick: (messageId: string) => void;
+  flow: string;
 }

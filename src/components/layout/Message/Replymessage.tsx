@@ -1,7 +1,7 @@
 import React from "react";
 import { CircleX } from "lucide-react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { RootState } from "../../../store/store";
 import { ChatData, users } from "../../../data";
 import { ReplyMessageProps } from "../../../types";
 

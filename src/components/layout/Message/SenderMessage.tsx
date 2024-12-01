@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { setReplyTarget } from "../../store/reducers/chatSlice";
+import { setReplyTarget } from "../../../store/reducers/chatSlice";
 import { format } from "date-fns";
 import { SenderMessageProps } from "../../../types";
 import { ReplyMenu } from "./ReplyMenu";
@@ -67,6 +67,7 @@ export const SenderMessage: React.FC<SenderMessageProps> = ({ message }) => {
                   replyMenuRef={replyMenuRef}
                   messageId={message.message_id}
                   handleReplyClick={handleReplyClick}
+                  flow="outgoing"
                 />
               )}
             </div>

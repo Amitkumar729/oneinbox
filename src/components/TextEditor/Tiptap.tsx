@@ -140,8 +140,16 @@ const Tiptap = forwardRef(({ onChange, content, placeholder }: any, ref) => {
   // Effect to manage focus state
   useEffect(() => {
     if (editor) {
-      editor.on("focus", () => setIsFocused(true));
-      editor.on("blur", () => setIsFocused(false));
+      const handleFocus = () => setIsFocused(true);
+      const handleBlur = () => setIsFocused(false);
+
+      editor.on("focus", handleFocus);
+      editor.on("blur", handleBlur);
+
+      return () => {
+        editor.off("focus", handleFocus);
+        editor.off("blur", handleBlur);
+      };
     }
   }, [editor]);
 

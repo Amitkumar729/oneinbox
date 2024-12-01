@@ -12,6 +12,7 @@ const EditorMessageContent: React.FC<EditorContentProps> = ({ message }) => {
   const imageUrl = message.content.text?.imageUrl || [];
   const videoUrl = message.content.text?.videoUrl || [];
   const audioUrl = message.content.text?.audioUrl || [];
+  const text = message.content.text.text || "";
 
   return (
     <>
@@ -20,7 +21,7 @@ const EditorMessageContent: React.FC<EditorContentProps> = ({ message }) => {
           <TextReply replyToId={message.replyTo?.toString() || ""} />
           <div className="text-sm">
             <ReactMarkdown
-              children={message.content.text.text || ""}
+              children={text}
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
             />
@@ -31,7 +32,7 @@ const EditorMessageContent: React.FC<EditorContentProps> = ({ message }) => {
           <div className="text-sm w-fit  ">
             {message.content.text && (
               <ReactMarkdown
-                children={message.content.text.text || ""}
+                children={text}
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
               />

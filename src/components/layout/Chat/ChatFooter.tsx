@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import Tiptap from "../../TextEditor/Tiptap";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { addMessage, clearReplyTarget } from "../../store/reducers/chatSlice";
+import { RootState } from "../../../store/store";
+import { addMessage, clearReplyTarget } from "../../../store/reducers/chatSlice";
 import { ReplyMessage } from "../Message/Replymessage";
 import { ChatFooterProps, ChatMessage } from "../../../types";
 
