@@ -2,13 +2,12 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-import { EditorContentProps } from "../../../types";
-import { EditorImageMessage } from "./EditorImage";
-import { EditorVideoMessage } from "./EditorVideo";
 import { TextReply } from "../Message/TextReply";
-import { EditorAudioMessage } from "./EditorAudio";
+import { ImageMessage } from "../Message/Image/ImageMessage";
+import { VideoMessage } from "../Message/Video/VideoMessage";
+import { AudioMessage } from "../Message/Audio/AudioMessage";
 
-const EditorMessageContent: React.FC<EditorContentProps> = ({ message }) => {
+const EditorMessageContent: React.FC = ({ message }: any) => {
   const imageUrl = message.content.text?.imageUrl || [];
   const videoUrl = message.content.text?.videoUrl || [];
   const audioUrl = message.content.text?.audioUrl || [];
@@ -40,17 +39,17 @@ const EditorMessageContent: React.FC<EditorContentProps> = ({ message }) => {
           </div>
           <div className="rounded-lg w-[300px] ">
             {imageUrl && imageUrl.length > 0 && (
-              <EditorImageMessage message={message} />
+              <ImageMessage imageUrl={imageUrl} />
             )}
           </div>
           <div className="rounded-lg w-[300px] ">
             {videoUrl && videoUrl.length > 0 && (
-              <EditorVideoMessage message={message} />
+              <VideoMessage videoUrl={videoUrl} />
             )}
           </div>
           <div className="rounded-lg w-[300px] ">
             {audioUrl && audioUrl.length > 0 && (
-              <EditorAudioMessage message={message} />
+              <AudioMessage audioUrl={audioUrl} />
             )}
           </div>
         </div>

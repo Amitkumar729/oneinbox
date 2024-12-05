@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Play, Pause, Maximize2, X } from "lucide-react";
-import { VideoMessageProps } from "../../../types";
+import { VideoMessageProps } from "../../../../types";
+import { VideoExpandedView } from "./VideoExpand";
+import { VideoControls } from "./VideoControls";
+import { formatTime } from "../../../../helper/utils";
 
-export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
+export const VideoMessage: React.FC<VideoMessageProps> = ({ videoUrl }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -76,48 +78,15 @@ export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
     };
   }, []);
 
-  // Format time in MM:SS
-  const formatTime = (timeInSeconds: number) => {
-    const minutes = Math.floor(timeInSeconds / 60);
-    const seconds = Math.floor(timeInSeconds % 60);
-    return `${minutes.toString().padStart(2, "0")}:${seconds
-      .toString()
-      .padStart(2, "0")}`;
-  };
-
-  const messageUrl1 = message.content.attachments[0].url;
+  // const videoUrl = message.content.attachments[0].url;
 
   if (isExpanded) {
     return (
-      <div
-        className="fixed inset-0 bg-black bg-opacity-90 
-        z-50 flex flex-col items-center justify-center"
-        onClick={(e) => {
-          // Prevent closing if clicking on video or controls
-          if ((e.target as HTMLElement).tagName !== "VIDEO") {
-            toggleExpand();
-          }
-        }}
-      >
-        {/* Close Button */}
-        <button
-          onClick={toggleExpand}
-          className="absolute top-4 right-4 text-white
-           bg-blue-200 bg-opacity-50 rounded-full p-2"
-        >
-          <X size={24} />
-        </button>
-
-        {/* Expanded Video Container */}
-        <div className="relative w-full max-w-4xl">
-          <video
-            ref={videoRef}
-            src={messageUrl1}
-            className="w-full max-h-[80vh] rounded-lg"
-            controls
-          />
-        </div>
-      </div>
+      <VideoExpandedView
+        videoUrl={videoUrl}
+        toggleExpand={toggleExpand}
+        videoRef={videoRef}
+      />
     );
   }
 
@@ -132,42 +101,21 @@ export const VideoMessage: React.FC<VideoMessageProps> = ({ message }) => {
               <div className="relative w-[300px]">
                 <video
                   ref={videoRef}
-                  src={messageUrl1}
+                  src={videoUrl}
                   className="max-w-[300px] max-h-[400px] rounded-t-lg"
                 />
 
                 {/* Video Controls */}
-                <div className="bg-black bg-opacity-70 p-2 rounded-b-lg flex items-center justify-between">
-                  <div className="flex items-center space-x-2 flex-grow">
-                    {/* Play/Pause Button */}
-                    <button onClick={toggleVideoPlay} className="text-white">
-                      {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-                    </button>
-
-                    {/* Progress Bar */}
-                    <div
-                      ref={progressRef}
-                      onClick={handleProgressChange}
-                      className="flex-grow bg-gray-500 h-1 rounded-full cursor-pointer"
-                    >
-                      <div
-                        className="bg-blue-500 h-1 rounded-full"
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
-
-                    {/* Time Display */}
-                    <div className="text-white text-xs">
-                      {formatTime(videoRef.current?.currentTime || 0)}/
-                      {formatTime(duration)}
-                    </div>
-                  </div>
-
-                  {/* Expand Button */}
-                  <button onClick={toggleExpand} className="text-white ml-2">
-                    <Maximize2 size={16} />
-                  </button>
-                </div>
+                <VideoControls
+                  isPlaying={isPlaying}
+                  toggleVideoPlay={toggleVideoPlay}
+                  progress={progress}
+                  duration={duration}
+                  currentTime={videoRef.current?.currentTime || 0}
+                  handleProgressChange={handleProgressChange}
+                  toggleExpand={toggleExpand}
+                  formatTime={formatTime}
+                />
               </div>
               <div></div>
             </div>

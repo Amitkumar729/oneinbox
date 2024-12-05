@@ -2,10 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { setReplyTarget } from "../../../store/reducers/chatSlice";
-import { format } from "date-fns";
 import { SenderMessageProps } from "../../../types";
 import { ReplyMenu } from "./ReplyMenu";
 import { MessageContent } from "./MessageContent";
+import { formattedTime } from "../../../helper/utils";
 
 export const SenderMessage: React.FC<SenderMessageProps> = ({ message }) => {
   const dispatch = useDispatch();
@@ -37,8 +37,6 @@ export const SenderMessage: React.FC<SenderMessageProps> = ({ message }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const formattedTime = format(new Date(message.metadata.timestamp), "hh:mm a");
 
   return (
     <>
@@ -84,7 +82,7 @@ export const SenderMessage: React.FC<SenderMessageProps> = ({ message }) => {
             }`}
           >
             <h6 style={{ fontSize: "10px" }} className="text-gray-500">
-              {formattedTime}
+              {formattedTime(message.metadata.timestamp)}
             </h6>
           </div>
         </div>

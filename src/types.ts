@@ -123,11 +123,34 @@ export interface ReceiverMessageProps {
 }
 
 export interface VideoMessageProps {
-  message: ChatMessages;
+  videoUrl: string;
+}
+
+export interface AudioMessageProps {
+  audioUrl: string;
+}
+
+export interface ImageMessageProps {
+  imageUrl: string;
 }
 
 export interface EditorContentProps {
   message: ChatMessage;
+}
+
+export interface EditorMessageContentProps {
+  message: {
+    type: "reply" | "message";
+    replyTo?: string | number;
+    content: {
+      text: {
+        text?: string;
+        imageUrl?: string[];
+        videoUrl?: string[];
+        audioUrl?: string[];
+      };
+    };
+  };
 }
 
 export interface ReplyMessageProps {

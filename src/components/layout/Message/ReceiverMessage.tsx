@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { ChevronDown } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { setReplyTarget } from "../../../store/reducers/chatSlice";
-import { format } from "date-fns";
 import { ReceiverMessageProps } from "../../../types";
 import { MessageContent } from "./MessageContent";
 import { ReplyMenu } from "./ReplyMenu";
+import { formattedTime } from "../../../helper/utils";
 
 export const ReceiverMessage: React.FC<ReceiverMessageProps> = ({
   message,
@@ -40,12 +40,12 @@ export const ReceiverMessage: React.FC<ReceiverMessageProps> = ({
     };
   }, []);
 
-  const formattedTime = format(new Date(message.metadata.timestamp), "hh:mm a");
-
   return (
     <div className="mb-2 relative ml-3">
-      <div className="bg-blue-50 flex-col items-start p-2 
-      max-w-[55%] w-fit rounded-md relative mb-1 px-2 border border-blue-100">
+      <div
+        className="bg-blue-50 flex-col items-start p-2 
+      max-w-[55%] w-fit rounded-md relative mb-1 px-2 border border-blue-100"
+      >
         <div className="flex flex-col w-full">
           <div className="flex group">
             <MessageContent message={message} />
@@ -82,7 +82,7 @@ export const ReceiverMessage: React.FC<ReceiverMessageProps> = ({
         }`}
       >
         <h6 style={{ fontSize: "10px" }} className="text-gray-500">
-          {formattedTime}
+          {formattedTime(message.metadata.timestamp)}
         </h6>
       </div>
     </div>
