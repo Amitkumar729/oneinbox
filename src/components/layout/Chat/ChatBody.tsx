@@ -23,17 +23,19 @@ const EditorMessage = lazy(() =>
   }))
 );
 
+
 export const ChatBody: React.FC = () => {
   return (
     <>
       <div>
+
         {ChatData.data.map((chat, idx) => {
           const currentDate = new Date(chat.metadata.timestamp).toDateString();
           const previousDate =
             idx > 0
               ? new Date(
-                  ChatData.data[idx - 1].metadata.timestamp
-                ).toDateString()
+                ChatData.data[idx - 1].metadata.timestamp
+              ).toDateString()
               : null;
 
           return (
